@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 import "./entrynavbar.css";
 import "./main_entry.css";
 import axios from 'axios';
@@ -14,6 +15,9 @@ export default function Login() {
     const text = ["Welcome Back", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente vitae nemo aut rerum, maiores sit commodi eius excepturi quis nihil?"]
     const [cookies, setCookies] = useCookies(['user']);
     const navigate = useNavigate();
+
+
+
     useEffect(() => {
         if (cookies.token) {
             navigate('/profile');
@@ -28,7 +32,11 @@ export default function Login() {
         };
         axios.post('http://localhost:4000/login', data).then((response) => {
             if (response.data.status === 400) {
-                setError(response.data.message);
+                toast.error(response.data.message, {
+                    duration: 2000,
+                    position: 'top-center'
+                });
+                // setError(response.data.message);
             } else {
                 setCookies('token', response.data.message, { path: '/' });
                 navigate('/profile');
@@ -40,6 +48,7 @@ export default function Login() {
     }
     return (
         <>
+            <Toaster />
             <div className="flex_div main_reg_div">
                 <Entry propText={text} />
                 <form onSubmit={handleSubmit} className="flex_div reg_div reg_form_div">
@@ -70,6 +79,7 @@ export default function Login() {
                 </select>
                 <button type="submit">Registration</button>
             </form> */}
+
         </>
     )
 }
