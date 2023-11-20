@@ -55,7 +55,7 @@ body{
 .reg_image_div_1 hr{
     width: 20%;
 }
-.reg_image_div_1 a{
+.socialLink{
     width: 40px;
     display: flex;
     justify-content: center;
@@ -65,15 +65,18 @@ body{
     background: white;
     border-radius: 50%;
     color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
 }
-.reg_image_div_1 a:nth-child(1){
+.socialLink:nth-child(1){
     background: #2AB0E9;
 
 }
-.reg_image_div_1 a:nth-child(2){
+.socialLink:nth-child(2){
     background: #DF4B38;
 }
-.reg_image_div_1 a:nth-child(3){
+.socialLink:nth-child(3){
     background: #3E5C9A;
 }
 .reg_form_div{
