@@ -4,6 +4,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+app.use(cors({
+    // origin: 'http://localhost:3000',
+    credentials: true, // Allow credentials (cookies)
+}));
 
 const encoded = bodyParser.urlencoded({ extended: true });
 app.use(encoded);
@@ -17,8 +21,11 @@ app.use("/", registration);
 app.use("/", login);
 app.use("/", profile);
 app.use("/", socialGoogleAuth);
+console.log("Ok")
 app.get('/index', (req, res) => {
+    res.cookie('myCookie', 'Hello, World!', { maxAge: 900000, httpOnly: true });
     res.send("Ok");
+
     console.log("Ok");
 })
 const port = process.env.PORT || 4000;

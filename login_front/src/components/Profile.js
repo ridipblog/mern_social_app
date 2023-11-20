@@ -23,6 +23,7 @@ export default function Profile() {
             navigate('/login');
         } else {
             getProfile();
+            console.log(cookies.token);
 
         }
     }, []);
