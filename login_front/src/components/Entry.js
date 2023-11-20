@@ -28,17 +28,7 @@ export default function Entry(props) {
             <div className="flex_div reg_image_div_1">
                 <GoogleOAuthProvider clientId="784573559341-c8fna8oekhjfg009jjnafn65neupq92b.apps.googleusercontent.com">
                     <GoogleLogin clientId="784573559341-c8fna8oekhjfg009jjnafn65neupq92b.apps.googleusercontent.com"
-                        render={(renderProps) => (
-                            <button
-                                type="button"
-                                className="bg-mainColor flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none"
-                                onClick={renderProps.onClick}
-                                disabled={renderProps.disabled}
-                            >
-                                {/* <FcGoogle className="mr-4" /> Sign in with your Google */}
-                                Account
-                            </button>
-                        )}
+
                         onSuccess={GoogleResponse}
                         onError={() => {
                             console.log('Login Failed');
