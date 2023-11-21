@@ -5,4 +5,5 @@ const encoded = bodyParser.urlencoded({ extended: true });
 router.use(cors());
 const LoginController = require('../controllers/LoginController');
 router.post('/login', encoded, LoginController.storeLogin);
+router.get('/loginWithGoogle', LoginController.LoginWithGoole);
 module.exports = router;

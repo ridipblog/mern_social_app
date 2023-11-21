@@ -7,7 +7,6 @@ import "./main_entry.css";
 import axios from 'axios';
 import Entry from "./Entry";
 import EntryNavbar from "./EntryNavbar";
-
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,13 +15,12 @@ export default function Login() {
     const [cookies, setCookies] = useCookies(['user']);
     const navigate = useNavigate();
 
-
-
     useEffect(() => {
+        console.log("Login");
         if (cookies.token) {
             navigate('/profile');
         }
-    }, []);
+    });
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {

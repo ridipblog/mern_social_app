@@ -1,14 +1,26 @@
 import axios from "axios";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
-import { useCookies } from "react-cookie";
-const GoogleResponse = async (response) => {
-    const decoded = await jwtDecode(response.credential);
-    console.log(decoded.email);
-    const data = await axios.get("http://localhost:4000/user");
-    console.log(data.data.message);
-}
+import { Cookies, useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 export default function Entry(props) {
+    const navigate = useNavigate();
+    const [cookies, setCookies] = useCookies(['user']);
+    const GoogleResponse = async (response) => {
+        const decoded = await jwtDecode(response.credential);
+        const data = await axios.get("http://localhost:4000/loginWithGoogle", {
+            params: {
+                login_email: decoded.email
+            }
+        });
+        if (data.data.status === 200) {
+            setCookies('token', data.data.message, { path: "/" });
+            navigate('/profile');
+        } else {
+            console.log(data.data.message);
+        }
+
+    }
     return (
         <div className="flex_div reg_div reg_image_div">
             <h1>{props.propText[0]}</h1>
