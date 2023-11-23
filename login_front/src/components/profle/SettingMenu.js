@@ -1,0 +1,48 @@
+import { useContext, useState } from "react";
+import { menuContext } from "../Profile";
+const SettingMenu = () => {
+    const [menu, setMenu] = useContext(menuContext);
+    const closeMenu = () => {
+        setMenu(!menu);
+    }
+    return (
+        <>
+            <div className="flexDiv main_profile_menu">
+                <div className="flexDiv main_profile_menu_div">
+                    <div className="flexDiv profile_menu_head_div">
+                        <p className="profile_menu_head_p">
+                            <span><i className="fa-solid fa-bell"></i></span>
+                        </p>
+                        <div className="flexDiv profile_menu_head_div_1">
+                            <span><i className="fa-solid fa-user"></i></span>
+                            <p>Ridip Goswami</p>
+                            <p>I Am Just A Programmer... </p>
+                        </div>
+                    </div>
+                    <div className="flexDiv profile_menu_body_div">
+                        <p>
+                            <span><i className="fa-regular fa-user"></i></span>
+                            <span>Profile</span>
+                        </p>
+                        <p>
+                            <span><i className="fa-solid fa-gear"></i></span>
+                            <span>Setting</span>
+                        </p>
+                        <p>
+                            <span><i className="fa-solid fa-right-from-bracket"></i></span>
+                            <span>Logout</span>
+                        </p>
+                        <div className="flexDiv profile_menu_notify_div">
+                            <p>Enable Notifications</p>
+                            <p><span>If you want to notify everyday from us.</span> <input type="checkbox" /> </p>
+                        </div>
+                        <div className="flexDiv profile_menu_close_div">
+                            <button onClick={closeMenu}><span><i className="fa-solid fa-xmark"></i></span> <span>Close</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+export default SettingMenu;
