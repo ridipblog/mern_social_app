@@ -34,7 +34,7 @@ export default function Registration() {
     }
     return (
         <>
-            <div className="flex_div main_reg_div">
+            <div className="flex_div main_entry_div main_reg_div">
                 <Entry propText={text} />
                 <form onSubmit={handleSubmit} className="flex_div reg_div reg_form_div">
                     <EntryNavbar />

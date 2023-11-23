@@ -8,14 +8,15 @@
     align-content: center;
 }
 
-body {
+
+.main_entry_div{
     background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.3)), url('../images/registration.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    min-height: 100dvh;
 }
-
 .main_reg_div {
     width: 100%;
 }

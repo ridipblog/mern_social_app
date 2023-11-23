@@ -16,7 +16,6 @@ export default function Login() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("Login");
         if (cookies.token) {
             navigate('/profile');
         }
@@ -47,7 +46,7 @@ export default function Login() {
     return (
         <>
             <Toaster />
-            <div className="flex_div main_reg_div">
+            <div className="flex_div main_entry_div main_reg_div">
                 <Entry propText={text} />
                 <form onSubmit={handleSubmit} className="flex_div reg_div reg_form_div">
                     <EntryNavbar />
