@@ -9,18 +9,22 @@ import "./profle/profile.css";
 import "./profle/profile_head.css";
 import "./profle/profile_center.css";
 import "./profle/setting_menu.css";
+import "./profle/profile_details.css";
 import { createContext, useEffect, useState } from "react";
+import ProfileDetails from "./profle/ProfileDetails";
 export const InfoContext = createContext();
 export const menuContext = createContext();
 export default function Profile() {
     const [cookies, setCookies, removeCookie] = useCookies(['user']);
     const navigate = useNavigate();
     const [infoState, setInfoState] = useState('');
+    const infoContext = {
+        infoState,
+    }
     const [menu, setMenu] = useState(false);
     const getData = async () => {
         const info = await authFunction(cookies.token, navigate, removeCookie);
         setInfoState(info);
-        console.log(info);
     }
     useEffect(() => {
         if (cookies.token) {
@@ -31,17 +35,19 @@ export default function Profile() {
     }, []);
     return (
         <>
-            <div className="flexDiv main_profile">
-                <InfoContext.Provider value={infoState}>
-                    <menuContext.Provider value={[menu, setMenu]}>
+
+            <InfoContext.Provider value={infoContext}>
+                <menuContext.Provider value={[menu, setMenu]}>
+                    <div className="flexDiv main_profile">
                         {
                             menu ? <SettingMenu /> : <p>dkjshj</p>
                         }
                         <ProfileHead />
                         <ProfileCenter />
-                    </menuContext.Provider>
-                </InfoContext.Provider>
-            </div >
+                    </div >
+                    <ProfileDetails />
+                </menuContext.Provider>
+            </InfoContext.Provider >
         </>
     )
 }

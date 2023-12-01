@@ -28,7 +28,7 @@ const ProfileHead = () => {
                         </div>
                         <div className="flexDiv profile_head_user_div">
                             <span><i className="fa-solid fa-user"></i></span>
-                            <span>{info.name === "No Name" ? "Ridip Goswami" : info.name}</span>
+                            <span>{info.infoState.name === "No Name" ? "Ridip Goswami" : info.infoState.name}</span>
                         </div>
                     </div>
                 </div>
