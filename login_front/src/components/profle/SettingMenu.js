@@ -1,9 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { menuContext } from "../Profile";
+import { cookieContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 const SettingMenu = () => {
+    const navigate = useNavigate();
     const [menu, setMenu] = useContext(menuContext);
+    const [cookies, setCookies, removeCookie] = useContext(cookieContext);
     const closeMenu = () => {
         setMenu(!menu);
+    }
+    const logoutUser = () => {
+        console.log("Ok");
+        removeCookie('token');
+        navigate('/login');
     }
     return (
         <>
@@ -28,7 +37,7 @@ const SettingMenu = () => {
                             <span><i className="fa-solid fa-gear"></i></span>
                             <span>Setting</span>
                         </p>
-                        <p>
+                        <p onClick={logoutUser}>
                             <span><i className="fa-solid fa-right-from-bracket"></i></span>
                             <span>Logout</span>
                         </p>

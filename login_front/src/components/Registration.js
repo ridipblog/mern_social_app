@@ -5,6 +5,7 @@ import axios from 'axios';
 import Entry from "./Entry";
 import EntryNavbar from "./EntryNavbar";
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 export default function Registration() {
     const navigate = useNavigate();
     const [username, setUserName] = useState('');
@@ -25,6 +26,10 @@ export default function Registration() {
         axios.post('http://localhost:4000/registration', data).then((response) => {
             if (response.data.status === 400) {
                 setError(response.data.message);
+                toast.error(response.data.message, {
+                    duration: 2000,
+                    position: 'top-center'
+                });
             } else {
                 navigate('/login');
             }
@@ -34,6 +39,7 @@ export default function Registration() {
     }
     return (
         <>
+            <Toaster />
             <div className="flex_div main_entry_div main_reg_div">
                 <Entry propText={text} />
                 <form onSubmit={handleSubmit} className="flex_div reg_div reg_form_div">
@@ -51,7 +57,6 @@ export default function Registration() {
                             <p><span>I agree all the statements in </span><br /><span> Terms of service</span></p>
                         </div>
                         <button type="submit">Sign Up</button>
-                        <p className="error">{error}</p>
                     </div>
                 </form>
 
