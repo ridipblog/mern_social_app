@@ -8,9 +8,11 @@ export default function Entry(props) {
     const [cookies, setCookies] = useCookies(['user']);
     const GoogleResponse = async (response) => {
         const decoded = await jwtDecode(response.credential);
+        console.log(decoded.given_name);
         const data = await axios.get("http://localhost:4000/loginWithGoogle", {
             params: {
-                login_email: decoded.email
+                login_email: decoded.email,
+                given_name: decoded.given_name
             }
         });
         if (data.data.status === 200) {

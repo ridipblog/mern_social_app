@@ -46,6 +46,7 @@ const storeLogin = async (req, res) => {
 }
 const LoginWithGoole = async (req, res) => {
     const login_email = req.query.login_email;
+    const given_name = req.query.given_name;
     const result = {
         status: 400,
         message: null
@@ -81,7 +82,7 @@ const LoginWithGoole = async (req, res) => {
             const hash_pass = await bcrypt.hash(rand_pass, 10);
             const token = await useFullMethod.generateToken(login_email);
             const user_data = {
-                name: "No Name",
+                name: given_name,
                 email: login_email,
                 password: hash_pass,
                 token: token
