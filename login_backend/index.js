@@ -31,6 +31,31 @@ app.get('/index', (req, res) => {
     console.log("Ok");
 })
 const port = process.env.PORT || 4000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log("Server Running");
 });
+
+const io = require("socket.io")(server);
+io.on('connection', (socket) => {
+    console.log("Client is connected ");
+    socket.on('join-room', (room) => {
+        socket.join(room);
+        console.log("Joined From " + room + " Room");
+    });
+    socket.on('leave-room', (room) => {
+        socket.leave(room);
+    });
+    socket.on('message', ({ room, data }) => {
+        console.log('message recived');
+        const recive_data = {
+            message: data.message,
+            username: data.username
+        };
+        console.log(data);
+        console.log(room);
+        io.to(room).emit('message', room, recive_data);
+    });
+    socket.on('disconnect', () => {
+        console.log("Client disconnected ");
+    });
+})
