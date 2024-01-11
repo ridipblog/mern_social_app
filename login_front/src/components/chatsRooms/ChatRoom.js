@@ -1,12 +1,14 @@
 // import React, { useEffect, useState } from "react";
 // import io from 'socket.io-client';
 import ChatSideBar from "./ChatSideBar";
+import ChatFriendPanel from "./ChatFriendPanel";
 import "../class.css";
 // Import Main Css File For This File
 import "./chatroom.css";
-// Import Chat Side Bar
+// Import Chat Side Bar Css
 import "./ChatSideBar.css";
-
+// Import Chat Friend Panel Css
+import "./ChatFriendPanel.css";
 export default function ChatRoom() {
     // const [message, setMessage] = useState('');
     // const [messages, setMessages] = useState([]);
@@ -55,6 +57,8 @@ export default function ChatRoom() {
             <div className="flexDiv main-chat-div">
                 {/* Chat Side Bar Component */}
                 <ChatSideBar />
+                {/* Chat Friend Panel  */}
+                <ChatFriendPanel />
             </div>
         </>
     );

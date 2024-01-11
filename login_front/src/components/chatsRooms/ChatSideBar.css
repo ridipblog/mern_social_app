@@ -32,4 +32,9 @@
     color: #737785;
     font-size: 17px;
     cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+
+.chat-side-menu:last-child p:hover {
+    transform: scale(1.2);
 }
