@@ -41,6 +41,7 @@
 .chat-frnd-list-div {
     width: 100%;
     margin-top: 10px;
+    position: relative;
 }
 
 .chat-frnd-div {
@@ -50,8 +51,55 @@
     padding: 5px 3px;
     border-radius: 5px;
     margin-top: 10px;
+    cursor: pointer;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    transition: 0.7s ease-in-out;
 }
 
 .chat-frnd-div:first-child {
     background: #7077FF;
+}
+
+.chat-frnd-div:hover {
+    background: #7077FF;
+}
+
+.chat-frnd-profile-div {
+    width: 20%;
+    position: relative;
+}
+
+.frnd_profile {
+    width: 34px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+.chat-frnd-profile-div span {
+    z-index: 99;
+    width: 8px;
+    border-radius: 50%;
+    background-color: red;
+    height: 8px;
+    position: absolute;
+    margin-right: 20px;
+    bottom: 0;
+    color: red;
+}
+
+.chat-frnd-details-div {
+    width: 75%;
+}
+
+.chat-frnd-details-div p {
+    width: 100%;
+    color: white;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.chat-frnd-details-div p:first-child {
+
+    font-weight: bold;
 }
