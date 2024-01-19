@@ -2,7 +2,7 @@
     background: #414759;
     height: 90%;
     align-content: start;
-    width: 26%;
+    width: 30%;
 }
 
 .chat-frnd-search-div {
@@ -53,6 +53,8 @@
     margin-top: 10px;
     cursor: pointer;
     flex-wrap: nowrap;
+    outline: none;
+    border: none;
     justify-content: space-between;
     transition: 0.7s ease-in-out;
 }
@@ -97,6 +99,29 @@
     color: white;
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
+    margin: 5px 0px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+
+}
+
+.chat-frnd-details-div p span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.chat-frnd-details-div p span:first-child {
+    width: 68%;
+}
+
+.chat-frnd-details-div p span:last-child {
+    width: 29%;
 }
 
 .chat-frnd-details-div p:first-child {

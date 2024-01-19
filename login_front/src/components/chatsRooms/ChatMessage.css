@@ -1,0 +1,41 @@
+.main-chat-message-div {
+    width: 60%;
+    height: 90%;
+    background: #383F4D;
+    align-content: flex-start;
+}
+
+.frnd-chat-nav-div {
+    width: 100%;
+    background: #414759;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.frnd-chat-nav-img-div {
+    width: 20%;
+}
+
+.frnd-chat-nav-div img {
+    width: 44px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.frnd-chat-nav-name-div {
+    width: 78%;
+}
+
+.frnd-chat-nav-name-div p {
+    width: 100%;
+    color: white;
+    margin: 5px 0px;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.main-frnd-chat-div {
+    width: 100%;
+    height: calc(100% - 70px);
+    border: 1px solid red;
+}

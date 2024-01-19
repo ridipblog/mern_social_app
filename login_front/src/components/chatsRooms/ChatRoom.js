@@ -2,6 +2,7 @@
 // import io from 'socket.io-client';
 import ChatSideBar from "./ChatSideBar";
 import ChatFriendPanel from "./ChatFriendPanel";
+import ChatMessage from "./ChatMessage";
 import "../class.css";
 // Import Main Css File For This File
 import "./chatroom.css";
@@ -9,6 +10,8 @@ import "./chatroom.css";
 import "./ChatSideBar.css";
 // Import Chat Friend Panel Css
 import "./ChatFriendPanel.css";
+// Import Chat Message Panel Css
+import "./ChatMessage.css";
 export default function ChatRoom() {
     // const [message, setMessage] = useState('');
     // const [messages, setMessages] = useState([]);
@@ -59,6 +62,8 @@ export default function ChatRoom() {
                 <ChatSideBar />
                 {/* Chat Friend Panel  */}
                 <ChatFriendPanel />
+                {/* Chat Message Panel  */}
+                <ChatMessage />
             </div>
         </>
     );

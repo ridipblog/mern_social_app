@@ -5,6 +5,7 @@ export default function ChatFriendPanel() {
     const [inputState, setInputState] = useState({
         frnd_name: "",
     });
+    const [frndConnect, setFrndConnect] = useState(false);
     const temp_arr = [
         { id: 1, name: 'coder 1' },
         { id: 2, name: 'coder 2' },
@@ -27,16 +28,16 @@ export default function ChatFriendPanel() {
             </div>
             <div className='flexDiv chat-frnd-list-div'>
                 {temp_arr.map((item) => (
-                    <div key={item.id} className='flexDiv chat-frnd-div' >
+                    <button key={item.id} className='flexDiv chat-frnd-div' >
                         <div className='flexDiv chat-frnd-profile-div'>
                             <img src={frnd_profile_dummy} className='frnd_profile' alt='friend-profile' />
                             <span></span>
                         </div>
                         <div className='flexDiv chat-frnd-details-div'>
                             <p>{item.name}</p>
-                            <p>Developer</p>
+                            <p><span>Developer</span> <span>10:02</span></p>
                         </div>
-                    </div>
+                    </button>
 
                 ))
                 }
