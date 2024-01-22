@@ -8,6 +8,8 @@
 .chat-frnd-search-div {
     width: 95%;
     background: transparent;
+    height: 35px;
+    align-items: flex-start;
     flex-wrap: nowrap;
     margin-top: 20px;
     justify-content: space-between;
@@ -42,6 +44,19 @@
     width: 100%;
     margin-top: 10px;
     position: relative;
+    overflow: scroll;
+    height: auto;
+    max-height: calc(100% - 55px);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    align-content: flex-start;
+
+}
+
+.chat-frnd-list-div::-webkit-scrollbar {
+    width: 0px;
 }
 
 .chat-frnd-div {

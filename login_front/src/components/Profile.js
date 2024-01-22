@@ -45,6 +45,7 @@ export default function Profile() {
                         <ProfileHead />
                         <ProfileCenter />
                     </div >
+
                     <ProfileDetails />
                 </menuContext.Provider>
             </InfoContext.Provider >

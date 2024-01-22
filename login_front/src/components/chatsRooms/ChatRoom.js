@@ -1,5 +1,6 @@
 // import React, { useEffect, useState } from "react";
 // import io from 'socket.io-client';
+
 import ChatSideBar from "./ChatSideBar";
 import ChatFriendPanel from "./ChatFriendPanel";
 import ChatMessage from "./ChatMessage";
@@ -12,7 +13,7 @@ import "./ChatSideBar.css";
 import "./ChatFriendPanel.css";
 // Import Chat Message Panel Css
 import "./ChatMessage.css";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 export const FrndDataContext = createContext();
 export default function ChatRoom() {
     const [frndData, setFrndData] = useState({
@@ -46,6 +47,8 @@ export default function ChatRoom() {
     // const addPersonName = async () => {
     //     setRoomName(personName);
     // }
+    useEffect(() => {
+    }, [])
     return (
         <>
             {/* <div className="">

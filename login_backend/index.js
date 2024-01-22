@@ -18,11 +18,13 @@ const login = require('./routes/LoginRoute');
 const profile = require('./routes/ProfileRoute');
 const socialGoogleAuth = require('./routes/GoogleAuth');
 const Auth = require('./routes/AuthRoute');
+const userRoutes = require('./routes/UsersRoute');
 app.use("/", registration);
 app.use("/", login);
 app.use("/", profile);
 app.use("/", socialGoogleAuth);
 app.use("/", Auth);
+app.use("/", userRoutes);
 console.log("Ok")
 app.get('/index', (req, res) => {
     res.cookie('myCookie', 'Hello, World!', { maxAge: 900000, httpOnly: true });

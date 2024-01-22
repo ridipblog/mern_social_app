@@ -1,25 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import baseInstance from "../base/baseServer";
 // friend profile dummy
 import frnd_profile_dummy from "./images/frnd-profile.jpg";
+
+
 export default function ChatFriendPanel() {
     const [inputState, setInputState] = useState({
         frnd_name: "",
     });
-    const [frndConnect, setFrndConnect] = useState(false);
-    const temp_arr = [
-        { id: 1, name: 'coder 1' },
-        { id: 2, name: 'coder 2' },
-        { id: 3, name: 'coder 3' }
-    ]
+    const [userList, setUserList] = useState([]);
+
     const chanageInputValue = (e) => {
         setInputState(prevState => ({
             ...prevState,
             [e.target.name]: e.target.value
         }));
     }
-    const justRun = (e) => {
-        console.log("Ok");
+
+    const getAllUsers = async () => {
+        try {
+            var all_users = await baseInstance.get('/get-all-users');
+            setUserList(all_users.data.users);
+        } catch (error) {
+            console.log(error);
+        }
     }
+    useEffect(() => {
+        getAllUsers();
+    }, [])
     return (
         <div className="flexDiv main-chat-frnd-div">
             <div className="flexDiv chat-frnd-search-div">
@@ -27,7 +35,7 @@ export default function ChatFriendPanel() {
                 <p><i className="fa-solid fa-arrows-rotate"></i></p>
             </div>
             <div className='flexDiv chat-frnd-list-div'>
-                {temp_arr.map((item) => (
+                {userList.map((item) => (
                     <button key={item.id} className='flexDiv chat-frnd-div' >
                         <div className='flexDiv chat-frnd-profile-div'>
                             <img src={frnd_profile_dummy} className='frnd_profile' alt='friend-profile' />
