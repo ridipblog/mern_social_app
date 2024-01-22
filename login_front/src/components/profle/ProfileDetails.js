@@ -1,5 +1,6 @@
-import { useContext } from 'react';
-import { InfoContext } from '../Profile';
+import { NavLink } from 'react-router-dom';
+// import { useContext } from 'react';
+// import { InfoContext } from '../Profile';
 
 const ProfileDetails = () => {
     const dummy = require('../../images/background.jpg');
@@ -7,9 +8,9 @@ const ProfileDetails = () => {
         <div className="flexDiv main_profile_details">
             <div className="flexDiv main_profile_social">
                 <div className="flexDiv profile_social_div">
-                    <button>Connect</button>
+                    <NavLink className="profile-social-btn" to="/chat-room">Connect</NavLink>
                     <img src={dummy} alt="sasas" />
-                    <button>Message</button>
+                    <NavLink className="profile-social-btn" to="/chat-room">Message</NavLink>
                 </div>
                 <div className='flexDiv profile_social_data'>
                     <p>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import baseInstance from './base/baseServer';
 import "./entrynavbar.css";
 import "./main_entry.css";
 import axios from 'axios';
@@ -27,7 +28,7 @@ export default function Login() {
             password,
 
         };
-        axios.post('http://localhost:4000/login', data).then((response) => {
+        baseInstance.post('/login', data).then((response) => {
             if (response.data.status === 400) {
                 toast.error(response.data.message, {
                     duration: 2000,

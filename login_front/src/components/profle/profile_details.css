@@ -30,23 +30,22 @@
 }
 
 
-.profile_social_div button {
+.profile-social-btn {
     padding: 5px 20px;
     border-radius: 3px;
     font-size: 14px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
+    text-decoration: none;
     cursor: pointer;
-    border: none;
-    outline: none;
 }
 
-.profile_social_div button:first-child {
+.profile-social-btn:first-child {
     background: #11CDEF;
     color: white;
 }
 
-.profile_social_div button:last-child {
+.profile-social-btn:last-child {
     background: #172B4D;
     color: white;
 }

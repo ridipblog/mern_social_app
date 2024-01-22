@@ -6,6 +6,7 @@ import Entry from "./Entry";
 import EntryNavbar from "./EntryNavbar";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
+import baseInstance from "./base/baseServer";
 export default function Registration() {
     const navigate = useNavigate();
     const [username, setUserName] = useState('');
@@ -23,7 +24,7 @@ export default function Registration() {
             checked
 
         };
-        axios.post('http://localhost:4000/registration', data).then((response) => {
+        baseInstance.post('/registration', data).then((response) => {
             if (response.data.status === 400) {
                 setError(response.data.message);
                 toast.error(response.data.message, {

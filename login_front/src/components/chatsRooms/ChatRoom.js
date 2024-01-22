@@ -12,7 +12,12 @@ import "./ChatSideBar.css";
 import "./ChatFriendPanel.css";
 // Import Chat Message Panel Css
 import "./ChatMessage.css";
+import { createContext, useState } from "react";
+export const FrndDataContext = createContext();
 export default function ChatRoom() {
+    const [frndData, setFrndData] = useState({
+        frnd_details: null,
+    });
     // const [message, setMessage] = useState('');
     // const [messages, setMessages] = useState([]);
     // const [personName, setPersonName] = useState('');
@@ -57,14 +62,16 @@ export default function ChatRoom() {
                     <button onClick={sendMessage}>Send</button>
                 </div>
             </div> */}
-            <div className="flexDiv main-chat-div">
-                {/* Chat Side Bar Component */}
-                <ChatSideBar />
-                {/* Chat Friend Panel  */}
-                <ChatFriendPanel />
-                {/* Chat Message Panel  */}
-                <ChatMessage />
-            </div>
+            <FrndDataContext.Provider value={[frndData, setFrndData]}>
+                <div className="flexDiv main-chat-div">
+                    {/* Chat Side Bar Component */}
+                    <ChatSideBar />
+                    {/* Chat Friend Panel  */}
+                    <ChatFriendPanel />
+                    {/* Chat Message Panel  */}
+                    <ChatMessage />
+                </div>
+            </FrndDataContext.Provider>
         </>
     );
 }

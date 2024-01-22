@@ -37,5 +37,5 @@
 .main-frnd-chat-div {
     width: 100%;
     height: calc(100% - 70px);
-    border: 1px solid red;
+    border-radius: 10px;
 }

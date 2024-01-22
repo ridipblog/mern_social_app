@@ -1,12 +1,13 @@
 
 import axios from "axios";
+import baseInstance from "../base/baseServer";
 const authFunction = async (token, navigate, removeCookie) => {
     var user_data;
 
     if (token) {
         var check_user = null;
         try {
-            check_user = await axios.get("http://localhost:4000/check_auth", {
+            check_user = await baseInstance.get("/check_auth", {
                 params: {
                     token: token
                 }
