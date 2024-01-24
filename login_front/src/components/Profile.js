@@ -10,12 +10,14 @@ import "./profle/profile_head.css";
 import "./profle/profile_center.css";
 import "./profle/setting_menu.css";
 import "./profle/profile_details.css";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import ProfileDetails from "./profle/ProfileDetails";
+import { cookieContext } from "../App";
 export const InfoContext = createContext();
 export const menuContext = createContext();
 export default function Profile() {
     const [cookies, setCookies, removeCookie] = useCookies(['user']);
+    // const [cookies, setCookies, removeCookie] = useContext(cookieContext);
     const navigate = useNavigate();
     const [infoState, setInfoState] = useState('');
     const infoContext = {

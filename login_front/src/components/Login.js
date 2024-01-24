@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
@@ -8,6 +8,8 @@ import "./main_entry.css";
 import axios from 'axios';
 import Entry from "./Entry";
 import EntryNavbar from "./EntryNavbar";
+// cookie context from app
+import { cookieContext } from "../App";
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,7 +22,7 @@ export default function Login() {
         if (cookies.token) {
             navigate('/profile');
         }
-    });
+    }, [cookies.token]);
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -28,7 +30,7 @@ export default function Login() {
             password,
 
         };
-        baseInstance.post('/login', data).then((response) => {
+        baseInstance.post('/login', data).then(async (response) => {
             if (response.data.status === 400) {
                 toast.error(response.data.message, {
                     duration: 2000,

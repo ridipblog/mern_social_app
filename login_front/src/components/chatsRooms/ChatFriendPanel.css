@@ -70,6 +70,7 @@
     flex-wrap: nowrap;
     outline: none;
     border: none;
+    z-index: 99;
     justify-content: space-between;
     transition: 0.7s ease-in-out;
 }
@@ -142,4 +143,8 @@
 .chat-frnd-details-div p:first-child {
 
     font-weight: bold;
+}
+
+.frnd-btn-clicked {
+    background: red;
 }

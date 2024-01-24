@@ -2,16 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import { menuContext } from "../Profile";
 import { cookieContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 const SettingMenu = () => {
     const navigate = useNavigate();
     const [menu, setMenu] = useContext(menuContext);
-    const [cookies, setCookies, removeCookie] = useContext(cookieContext);
+    const [cookies, setCookies, removeCookie] = useCookies(['user']);
     const closeMenu = () => {
         setMenu(!menu);
     }
-    const logoutUser = () => {
+    const logoutUser = async () => {
         console.log("Ok");
         removeCookie('token');
+        removeCookie('token', { path: '/' });
         navigate('/login');
     }
     return (
