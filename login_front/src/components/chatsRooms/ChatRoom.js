@@ -1,6 +1,7 @@
-// import React, { useEffect, useState } from "react";
 // import io from 'socket.io-client';
-
+import { useCookies } from "react-cookie"
+import { useNavigate } from "react-router-dom";
+import authFunction from '../UsedMethods/authFunction';
 import ChatSideBar from "./ChatSideBar";
 import ChatFriendPanel from "./ChatFriendPanel";
 import ChatMessage from "./ChatMessage";
@@ -15,10 +16,26 @@ import "./ChatFriendPanel.css";
 import "./ChatMessage.css";
 import { createContext, useEffect, useState } from "react";
 export const FrndDataContext = createContext();
+export const requiredContextData = createContext();
 export default function ChatRoom() {
+    const [cookies, , removeCookie] = useCookies(['user']);
+    const navigate = useNavigate();
+    const [userInfo, setUserInfo] = useState('');
+    const [roomName, setRoomName] = useState('');
+    const getUserData = async () => {
+        const info = await authFunction(cookies.token, navigate, removeCookie);
+        setUserInfo(info);
+    }
     const [frndData, setFrndData] = useState({
-        frnd_details: null,
+        // frnd_details: null,
     });
+    const contextData = {
+        userInfo,
+        roomContext: [roomName, setRoomName]
+    }
+    useEffect(() => {
+        getUserData();
+    }, [])
     // const [message, setMessage] = useState('');
     // const [messages, setMessages] = useState([]);
     // const [personName, setPersonName] = useState('');
@@ -47,8 +64,6 @@ export default function ChatRoom() {
     // const addPersonName = async () => {
     //     setRoomName(personName);
     // }
-    useEffect(() => {
-    }, [])
     return (
         <>
             {/* <div className="">
@@ -65,16 +80,18 @@ export default function ChatRoom() {
                     <button onClick={sendMessage}>Send</button>
                 </div>
             </div> */}
-            <FrndDataContext.Provider value={[frndData, setFrndData]}>
-                <div className="flexDiv main-chat-div">
-                    {/* Chat Side Bar Component */}
-                    <ChatSideBar />
-                    {/* Chat Friend Panel  */}
-                    <ChatFriendPanel />
-                    {/* Chat Message Panel  */}
-                    <ChatMessage />
-                </div>
-            </FrndDataContext.Provider>
+            <requiredContextData.Provider value={contextData}>
+                <FrndDataContext.Provider value={[frndData, setFrndData]}>
+                    <div className="flexDiv main-chat-div">
+                        {/* Chat Side Bar Component */}
+                        <ChatSideBar />
+                        {/* Chat Friend Panel  */}
+                        <ChatFriendPanel />
+                        {/* Chat Message Panel  */}
+                        <ChatMessage />
+                    </div>
+                </FrndDataContext.Provider>
+            </requiredContextData.Provider>
         </>
     );
 }

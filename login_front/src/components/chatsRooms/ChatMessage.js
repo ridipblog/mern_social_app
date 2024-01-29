@@ -1,8 +1,18 @@
+import { useContext, useEffect, useState } from "react";
+import { requiredContextData } from "./ChatRoom";
 import frnd_profile_dummy from "./images/frnd-profile.jpg";
 export default function ChatMessage() {
+    const { roomContext } = useContext(requiredContextData);
+    const [roomName, setRoomName] = roomContext;
     const data = [
         1, 2, 3, 4, 5
     ];
+    const checkRoom = () => {
+        console.log(roomName)
+    }
+    useEffect(() => {
+
+    }, []);
     return (
         <div className="flexDiv main-chat-message-div">
             <div className="flexDiv frnd-chat-nav-div">
@@ -25,9 +35,10 @@ export default function ChatMessage() {
                         <button className="frnd-chat-input-btn"><i className="fa-solid fa-paperclip"></i></button>
                         <input type="text" id="frnd-chat-input" />
                     </div>
-                    <button className="frnd-chat-input-btn" ><i className="fa-solid fa-paper-plane"></i></button>
+                    <button onClick={checkRoom} className="frnd-chat-input-btn" ><i className="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
+
     )
 }

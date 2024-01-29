@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { InfoContext } from "../Profile";
 import { menuContext } from "../Profile";
 const ProfileHead = () => {
@@ -9,8 +9,7 @@ const ProfileHead = () => {
         console.log(menu)
     }
     useEffect(() => {
-
-    }, [menu]);
+    }, []);
     return (
         <>
             <div className="flexDiv profile_head_div">

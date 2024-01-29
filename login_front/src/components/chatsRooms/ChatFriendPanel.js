@@ -1,17 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import baseInstance from "../base/baseServer";
-// friend profile dummy
 import frnd_profile_dummy from "./images/frnd-profile.jpg";
-// Friend Data Context
-import { FrndDataContext } from './ChatRoom';
+
+import { requiredContextData } from './ChatRoom';
 
 export default function ChatFriendPanel() {
-
+    const { roomContext } = useContext(requiredContextData);
+    const { userInfo } = useContext(requiredContextData);
+    // socket connection with backend
+    const socket = io('http://localhost:4000', { transports: ['websocket'] });
     const [inputState, setInputState] = useState({
         frnd_name: "",
     });
-    const [frndData, setFrndData] = useContext(FrndDataContext);
     const [userList, setUserList] = useState([]);
+    const [selectedBtn, setSelectedBtn] = useState('');
+    const [roomName, setRoomName] = roomContext;
     const chanageInputValue = (e) => {
         setInputState(prevState => ({
             ...prevState,
@@ -27,11 +31,17 @@ export default function ChatFriendPanel() {
         }
     }
     const connectFrnd = async (event, item) => {
-        console.log(item.email);
+        var room_name = item.email + userInfo.email;
+        setRoomName(room_name);
+        setSelectedBtn(item.id);
     }
     useEffect(() => {
         getAllUsers();
     }, [])
+    useEffect(() => {
+        socket.emit('join-room', roomName);
+        console.log(roomName)
+    }, [roomName])
     return (
         <div className="flexDiv main-chat-frnd-div">
             <div className="flexDiv chat-frnd-search-div">
@@ -40,7 +50,7 @@ export default function ChatFriendPanel() {
             </div>
             <div className='flexDiv chat-frnd-list-div'>
                 {userList.map((item) => (
-                    <button key={item.id} onClick={(event) => connectFrnd(event, item)} className='flexDiv chat-frnd-div frnd-btn-clicked' >
+                    <button key={item.id} onClick={(event) => connectFrnd(event, item)} className={`flexDiv chat-frnd-div ${selectedBtn === item.id ? 'frnd-btn-clicked' : ''}`} >
                         <div className='flexDiv chat-frnd-profile-div'>
                             <img src={frnd_profile_dummy} className='frnd_profile' alt='friend-profile' />
                             <span></span>

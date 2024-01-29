@@ -72,12 +72,12 @@
     border: none;
     z-index: 99;
     justify-content: space-between;
-    transition: 0.7s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 
-.chat-frnd-div:first-child {
+/* .chat-frnd-div:first-child {
     background: #7077FF;
-}
+} */
 
 .chat-frnd-div:hover {
     background: #7077FF;
@@ -146,5 +146,6 @@
 }
 
 .frnd-btn-clicked {
-    background: red;
+    background: #7077FF;
+
 }
