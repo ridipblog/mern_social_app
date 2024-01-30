@@ -7,6 +7,7 @@ import { requiredContextData } from './ChatRoom';
 
 export default function ChatFriendPanel() {
     const { roomContext } = useContext(requiredContextData);
+    const { frndRoomContext } = useContext(requiredContextData);
     const { userInfo } = useContext(requiredContextData);
     // socket connection with backend
     const socket = io('http://localhost:4000', { transports: ['websocket'] });
@@ -16,6 +17,7 @@ export default function ChatFriendPanel() {
     const [userList, setUserList] = useState([]);
     const [selectedBtn, setSelectedBtn] = useState('');
     const [roomName, setRoomName] = roomContext;
+    const [frndRoomName, setFrndRoomName] = frndRoomContext;
     const chanageInputValue = (e) => {
         setInputState(prevState => ({
             ...prevState,
@@ -32,16 +34,18 @@ export default function ChatFriendPanel() {
     }
     const connectFrnd = async (event, item) => {
         var room_name = item.email + userInfo.email;
+        var frnd_room_name = userInfo.email + item.email;
         setRoomName(room_name);
+        setFrndRoomName(frnd_room_name);
         setSelectedBtn(item.id);
     }
     useEffect(() => {
         getAllUsers();
     }, [])
-    useEffect(() => {
-        socket.emit('join-room', roomName);
-        console.log(roomName)
-    }, [roomName])
+    // useEffect(() => {
+    //     socket.emit('join-room', roomName);
+    //     console.log(roomName)
+    // }, [roomName])
     return (
         <div className="flexDiv main-chat-frnd-div">
             <div className="flexDiv chat-frnd-search-div">

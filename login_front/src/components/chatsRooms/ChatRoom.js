@@ -22,6 +22,7 @@ export default function ChatRoom() {
     const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState('');
     const [roomName, setRoomName] = useState('');
+    const [frndRoomName, setFrndRoomName] = useState('');
     const getUserData = async () => {
         const info = await authFunction(cookies.token, navigate, removeCookie);
         setUserInfo(info);
@@ -31,7 +32,8 @@ export default function ChatRoom() {
     });
     const contextData = {
         userInfo,
-        roomContext: [roomName, setRoomName]
+        roomContext: [roomName, setRoomName],
+        frndRoomContext: [frndRoomName, setFrndRoomName]
     }
     useEffect(() => {
         getUserData();
