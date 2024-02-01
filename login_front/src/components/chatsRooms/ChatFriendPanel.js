@@ -9,6 +9,7 @@ export default function ChatFriendPanel() {
     const { roomContext } = useContext(requiredContextData);
     const { frndRoomContext } = useContext(requiredContextData);
     const { userInfo } = useContext(requiredContextData);
+    const { frndIDContext } = useContext(requiredContextData);
     // socket connection with backend
     const socket = io('http://localhost:4000', { transports: ['websocket'] });
     const [inputState, setInputState] = useState({
@@ -18,6 +19,7 @@ export default function ChatFriendPanel() {
     const [selectedBtn, setSelectedBtn] = useState('');
     const [roomName, setRoomName] = roomContext;
     const [frndRoomName, setFrndRoomName] = frndRoomContext;
+    const [frndID, setFrndID] = frndIDContext;
     const chanageInputValue = (e) => {
         setInputState(prevState => ({
             ...prevState,
@@ -38,6 +40,7 @@ export default function ChatFriendPanel() {
         setRoomName(room_name);
         setFrndRoomName(frnd_room_name);
         setSelectedBtn(item.id);
+        setFrndID(item);
     }
     useEffect(() => {
         getAllUsers();
@@ -54,16 +57,18 @@ export default function ChatFriendPanel() {
             </div>
             <div className='flexDiv chat-frnd-list-div'>
                 {userList.map((item) => (
-                    <button key={item.id} onClick={(event) => connectFrnd(event, item)} className={`flexDiv chat-frnd-div ${selectedBtn === item.id ? 'frnd-btn-clicked' : ''}`} >
-                        <div className='flexDiv chat-frnd-profile-div'>
-                            <img src={frnd_profile_dummy} className='frnd_profile' alt='friend-profile' />
-                            <span></span>
-                        </div>
-                        <div className='flexDiv chat-frnd-details-div'>
-                            <p>{item.name}</p>
-                            <p><span>Developer</span> <span>10:02</span></p>
-                        </div>
-                    </button>
+                    userInfo.email !== item.email ?
+                        <button key={item.id} onClick={(event) => connectFrnd(event, item)} className={`flexDiv chat-frnd-div ${selectedBtn === item.id ? 'frnd-btn-clicked' : ''}`} >
+                            <div className='flexDiv chat-frnd-profile-div'>
+                                <img src={frnd_profile_dummy} className='frnd_profile' alt='friend-profile' />
+                                <span></span>
+                            </div>
+                            <div className='flexDiv chat-frnd-details-div'>
+                                <p>{item.name}</p>
+                                <p><span>Developer</span> <span>10:02</span></p>
+                            </div>
+                        </button>
+                        : ''
                 ))
                 }
             </div>
