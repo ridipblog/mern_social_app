@@ -12,7 +12,7 @@ import { useCookies } from 'react-cookie';
 import { createContext, useEffect } from 'react';
 export const cookieContext = createContext();
 function App() {
-    const [cookies, setCookies, removeCookie] = useCookies(['user']);
+    const [cookies, , ,] = useCookies(['user']);
     useEffect(() => {
     });
     return (

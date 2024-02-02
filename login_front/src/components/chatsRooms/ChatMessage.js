@@ -12,9 +12,10 @@ export default function ChatMessage() {
     const { roomContext } = useContext(requiredContextData);
     const { frndRoomContext } = useContext(requiredContextData);
     const { frndIDContext } = useContext(requiredContextData);
-    const [roomName, setRoomName] = roomContext;
-    const [frndRoomName, setFrndRoomName] = frndRoomContext;
-    const [frndID, setFrndID] = frndIDContext;
+    const [roomName,] = roomContext;
+    const [frndRoomName,] = frndRoomContext;
+    const [frndID,] = frndIDContext;
+
     const [message, setMessage] = useState('');
     const [allMessages, setAllMessages] = useState({
         chat_messages: []
@@ -27,10 +28,14 @@ export default function ChatMessage() {
     const sendMessage = () => {
         const data = {
             message: message,
-            username: 'coder'
+            username: userInfo.name
         }
         const room = roomName;
         socket.emit('message', { room, data });
+        setAllMessages(prevState => ({
+            ...prevState,
+            chat_messages: [...prevState.chat_messages, [message, userInfo.name, userInfo.email]]
+        }));
     }
 
     useEffect(() => {
@@ -46,9 +51,12 @@ export default function ChatMessage() {
             // }));
             setAllMessages(prevState => ({
                 ...prevState,
-                chat_messages: [...prevState.chat_messages, [data.message, frndRoomName]]
+                chat_messages: [...prevState.chat_messages, [data.message, frndID.name, frndID.email]]
             }));
         });
+        return () => {
+            socket.emit('leave-room', frndRoomName)
+        };
     }, [frndRoomName]);
     return (
         <div className="flexDiv main-chat-message-div">
@@ -57,15 +65,43 @@ export default function ChatMessage() {
                     <img src={frnd_profile_dummy} alt="" />
                 </div>
                 <div className="flexDiv frnd-chat-nav-name-div">
-                    <p>Ridip Goswami</p>
-                    <p>Software Developer</p>
+                    {
+                        frndID ? (
+                            <>
+                                <p>{frndID.name}</p>
+                                {/* <p>Software Developer</p> */}
+                            </>
+                        )
+                            :
+                            (
+                                <p>No Connection</p>
+                            )
+                    }
                 </div>
             </div>
             <div className="flexDiv main-frnd-chat-div">
                 <div className="flexDiv frnd-chat-text-div">
-                    {data.map((number) => (
+                    {/* {data.map((number) => (
                         <p key={number}>{number}</p>
-                    ))}
+                    ))} */}
+                    {
+                        allMessages.chat_messages.map((messages, index) => (
+                            <React.Fragment key={index}>
+                                <div className="flexDiv main-frnd-msg" >
+                                    <div className="flexDiv main-frnd-msg-div">
+                                        <p className={`frnd-msg-name-para ${messages[2] === userInfo.email ? 'user-side-para' : ''}`}><span></span><span>{messages[1]}</span></p>
+                                        <div className={`flexDiv frnd-msg-div ${messages[2] === userInfo.email ? 'user-side-div' : ''}`}>
+                                            <p className={`frnd-msg-para ${messages[2] === userInfo.email ? 'user-side-para-1' : ''}`}>
+                                                {console.log(messages[2])}
+                                                {console.log(userInfo.email)}
+                                                {messages[0]}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        ))
+                    }
                 </div>
                 <div className="flexDiv frnd-chat-send-div">
                     <div className="flexDiv frnd-chat-send-input-div">
@@ -86,18 +122,7 @@ export default function ChatMessage() {
                     </React.Fragment>
                 ))
             } */}
-            {
-                // console.log(allMessages.chat_messages.length)
-                allMessages.chat_messages.map((msg, index) => (
-                    <React.Fragment key={index}>
-                        <p style={style} key={index}>{msg[0]}</p>
-                        <p style={style} key={(index + 1)}>{msg[1]}</p>
-                    </React.Fragment>
-                ))
-            }
-            {
-                console.log(frndID)
-            }
+
         </div >
 
     )

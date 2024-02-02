@@ -33,6 +33,7 @@ export default function Entry(props) {
                 <hr></hr>
             </div>
             <div className="flex_div reg_image_div_1">
+
                 <GoogleOAuthProvider clientId="784573559341-c8fna8oekhjfg009jjnafn65neupq92b.apps.googleusercontent.com">
                     <GoogleLogin clientId="784573559341-c8fna8oekhjfg009jjnafn65neupq92b.apps.googleusercontent.com"
                         type="icon"

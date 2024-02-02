@@ -1,6 +1,5 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 export default function ChatSideBar() {
-
     return (
         <div className="flexDiv main-chat-side-div">
             <div className="flexDiv chat-side-menu">

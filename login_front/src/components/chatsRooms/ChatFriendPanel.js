@@ -35,6 +35,7 @@ export default function ChatFriendPanel() {
         }
     }
     const connectFrnd = async (event, item) => {
+        socket.emit('leave-room', frndRoomName);
         var room_name = item.email + userInfo.email;
         var frnd_room_name = userInfo.email + item.email;
         setRoomName(room_name);
